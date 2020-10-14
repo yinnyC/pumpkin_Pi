@@ -63,7 +63,7 @@ try:
 
     while True:
 
-        distance = measure_average()
+        distance = get_avgdistance()
         soundPathList = ['./Resources/sounds/Cat Scream.mp3',
                          './Resources/sounds/Dark_Laugh.mp3',
                          './Resources/sounds/Evil_Laugh.mp3',
