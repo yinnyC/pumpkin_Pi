@@ -30,7 +30,13 @@ time.sleep(0.5)  # Allow module to settle
 speedSound = 34300
 
 filepath = os.path.dirname(__file__)
+<<<<<<< HEAD
 soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat Scream.mp3'),
+=======
+
+
+soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat_Scream.mp3'),
+>>>>>>> refs/remotes/origin/main
                  os.path.join(filepath, 'Resources/sounds/Dark_Laugh.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Evil_Laugh.mp3'),
                  os.path.join(filepath, 'Resources/sounds/I_will_kill_you.mp3')
@@ -75,11 +81,12 @@ try:
 
         print("Distance : %.1f" % distance)
 
-        if(distance == 0 or distance < 124):
+        if(distance == 0 or distance < 100):
             path = random.choice(soundPathList)
             os.system(f"mpg321 {path}")
+            time.sleep(3)
 
-        time.sleep(.25)  # time between loop iterations
+        time.sleep(.15)  # time between loop iterations
 
 except KeyboardInterrupt:
     GPIO.cleanup()
