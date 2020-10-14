@@ -12,6 +12,7 @@ import random
 import RPi.GPIO as GPIO
 import statistics
 import random
+import picamera
 
 # --------------------------------
 # Declear Global Variables
@@ -78,7 +79,7 @@ try:
 
         print("Distance : %.1f" % distance)
 
-        if(distance == 0 or distance < 100):
+        if(distance == 0 or distance < 400):
             path = random.choice(soundPathList)
             os.system(f"mpg321 {path}")
             time.sleep(3)
