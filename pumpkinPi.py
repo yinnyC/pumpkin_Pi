@@ -20,7 +20,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO_TRIGGER = 18
 GPIO_ECHO = 24
 
-
 # Set pins as output and input
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)  # Trigger
 GPIO.setup(GPIO_ECHO, GPIO.IN)      # Echo
@@ -29,6 +28,16 @@ GPIO.setup(GPIO_ECHO, GPIO.IN)      # Echo
 GPIO.output(GPIO_TRIGGER, False)
 time.sleep(0.5)  # Allow module to settle
 speedSound = 34300
+
+filepath = os.path.dirname(__file__)
+
+
+soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat Scream.mp3'),
+                 os.path.join(filepath, 'Resources/sounds/Dark_Laugh.mp3'),
+                 os.path.join(filepath, 'Resources/sounds/Evil_Laugh.mp3'),
+                 os.path.join(filepath, 'Resources/sounds/I_will_kill_you.mp3')
+                 ]
+
 print("Ultrasonic Measurement")
 
 
@@ -64,10 +73,6 @@ try:
     while True:
 
         distance = get_avgdistance()
-        soundPathList = ['./Resources/sounds/Cat Scream.mp3',
-                         './Resources/sounds/Dark_Laugh.mp3',
-                         './Resources/sounds/Evil_Laugh.mp3',
-                         './Resources/sounds/I_will_kill_you.mp3']
         randomNumber = random.randint(1, 12)
 
         print("Distance : %.1f" % distance)
