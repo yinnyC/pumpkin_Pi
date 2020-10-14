@@ -1,6 +1,7 @@
 # Pumpkin Pi
 
-    An interactive Jack-o-lantern powered by raspberry pi, that will play a spooky sound whenever it detects someone walks by and take a picture of whom it scares. Later on, the picture will be uploaded onto a website, like a photo booth of the roller coaster.
+An interactive Jack-o-lantern powered by raspberry pi, that will play a spooky sound whenever it detects someone walks by and take a picture of whom it scares.
+Later on, the picture will be uploaded onto a website, like a photo booth of the roller coaster.
 
 ## Product Features
 
@@ -10,3 +11,7 @@
 ## Wire Frames
 
 ![Wireframe](./Resources/readme_imgs/Wireframe.jpg)
+
+## Copyright
+
+- All the sound effects are from [SoundBible.com](http://soundbible.com/)
