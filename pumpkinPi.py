@@ -30,16 +30,13 @@ time.sleep(0.5)  # Allow module to settle
 speedSound = 34300
 
 filepath = os.path.dirname(__file__)
-<<<<<<< HEAD
-soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat Scream.mp3'),
-=======
-
 
 soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat_Scream.mp3'),
->>>>>>> refs/remotes/origin/main
                  os.path.join(filepath, 'Resources/sounds/Dark_Laugh.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Evil_Laugh.mp3'),
-                 os.path.join(filepath, 'Resources/sounds/I_will_kill_you.mp3')
+                 os.path.join(
+                     filepath, 'Resources/sounds/I_will_kill_you.mp3'),
+                 os.path.join(filepath, 'Resources/sounds/Witches_Laugh.mp3')
                  ]
 
 print("Ultrasonic Measurement")
