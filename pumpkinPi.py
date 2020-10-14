@@ -30,8 +30,6 @@ time.sleep(0.5)  # Allow module to settle
 speedSound = 34300
 
 filepath = os.path.dirname(__file__)
-
-
 soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat Scream.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Dark_Laugh.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Evil_Laugh.mp3'),
