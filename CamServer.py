@@ -1,4 +1,3 @@
-# Web streaming example
 # Source code from the official PiCamera package
 # http://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
 
@@ -9,10 +8,10 @@ import socketserver
 from threading import Condition
 from http import server
 
-PAGE="""\
+PAGE = """\
 <html>
 <head>
-<title>Raspberry Pi - Surveillance Camera</title>
+<title>Pumpkin Pi</title>
 </head>
 <body>
 <center><h1>Pumpkin Pi <3 </h1></center>
@@ -20,6 +19,7 @@ PAGE="""\
 </body>
 </html>
 """
+
 
 class StreamingOutput(object):
     def __init__(self):
@@ -37,6 +37,7 @@ class StreamingOutput(object):
                 self.condition.notify_all()
             self.buffer.seek(0)
         return self.buffer.write(buf)
+
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
@@ -56,7 +57,8 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.send_header('Age', 0)
             self.send_header('Cache-Control', 'no-cache, private')
             self.send_header('Pragma', 'no-cache')
-            self.send_header('Content-Type', 'multipart/x-mixed-replace; boundary=FRAME')
+            self.send_header(
+                'Content-Type', 'multipart/x-mixed-replace; boundary=FRAME')
             self.end_headers()
             try:
                 while True:
@@ -77,13 +79,14 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.send_error(404)
             self.end_headers()
 
+
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
 
+
 with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
     output = StreamingOutput()
-    #Uncomment the next line to change your Pi's Camera rotation (in degrees)
     camera.start_recording(output, format='mjpeg')
     try:
         address = ('', 8000)

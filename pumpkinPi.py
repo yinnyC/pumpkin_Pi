@@ -71,20 +71,14 @@ def get_avgdistance():
 
 
 try:
-
     while True:
-
         distance = get_avgdistance()
-        randomNumber = random.randint(1, 12)
-
         print("Distance : %.1f" % distance)
-
         if(distance == 0 or distance < 400):
             path = random.choice(soundPathList)
             os.system(f"mpg321 {path}")
             time.sleep(3)
 
         time.sleep(.15)  # time between loop iterations
-
 except KeyboardInterrupt:
     GPIO.cleanup()
