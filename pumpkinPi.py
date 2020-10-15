@@ -74,13 +74,12 @@ def Pumpkinpi():
     try:
         distance = get_avgdistance()
         print("Distance : %.1f" % distance)
-
+        takePic = False
         if(distance == 0 or distance < 200):
             path = random.choice(soundPathList)
             os.system(f"mpg321 {path}")
-            time.sleep(3)
-
-        time.sleep(.15)  # time between loop iterations
-
+            takePic = True
+        time.sleep(3)  # time between loop iterations
+        return takePic
     except KeyboardInterrupt:
         GPIO.cleanup()
