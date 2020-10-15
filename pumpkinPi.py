@@ -69,22 +69,19 @@ def get_avgdistance():
         distanceList.append(d)
     return statistics.mean(distanceList)
 
-
-try:
-
-    while True:
-
+def Pumpkinpi():
+    try:
         distance = get_avgdistance()
         randomNumber = random.randint(1, 12)
 
         print("Distance : %.1f" % distance)
 
-        if(distance == 0 or distance < 400):
+        if(distance == 0 or distance < 200):
             path = random.choice(soundPathList)
             os.system(f"mpg321 {path}")
             time.sleep(3)
 
         time.sleep(.15)  # time between loop iterations
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
+    except KeyboardInterrupt:
+        GPIO.cleanup()

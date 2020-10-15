@@ -8,7 +8,7 @@ import logging
 import socketserver
 from threading import Condition
 from http import server
-
+from pumpkinPi import Pumpkinpi
 PAGE="""\
 <html>
 <head>
@@ -60,6 +60,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
             try:
                 while True:
+                    Pumpkinpi()
                     with output.condition:
                         output.condition.wait()
                         frame = output.frame
