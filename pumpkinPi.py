@@ -7,6 +7,7 @@
 # Import required Python libraries
 # --------------------------------
 import time
+import datetime
 import os
 import random
 import RPi.GPIO as GPIO
@@ -40,6 +41,7 @@ soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat_Scream.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Witches_Laugh.mp3')
                  ]
 
+camera = picamera.PiCamera()
 print("Ultrasonic Measurement")
 
 
@@ -69,17 +71,21 @@ def get_avgdistance():
         distanceList.append(d)
     return statistics.mean(distanceList)
 
+def captureClip():
+     timestamp = datetime.datetime.now()
+     time_info= f"{timestamp.strftime('%M%d%Y_%H%M%S')}"
+     camera.capture(os.path.join(filepath, f'static/target_captured/{time_info}.jpg'))
 
-def Pumpkinpi():
+
+while True:
     try:
         distance = get_avgdistance()
         print("Distance : %.1f" % distance)
-        takePic = False
-        if(distance == 0 or distance < 200):
+        if(distance == 0 or distance < 100):
             path = random.choice(soundPathList)
+            captureClip()
             os.system(f"mpg321 {path}")
-            takePic = True
-        time.sleep(3)  # time between loop iterations
-        return takePic
+            time.sleep(3)  # time between loop iterations
     except KeyboardInterrupt:
+        print("no")
         GPIO.cleanup()
