@@ -34,7 +34,6 @@ header a {
 }
 #viewing-window {
 	min-height: 100vh;
-	background-color: orangered;
 }
 #viewing-window center {
 	padding-top: 120px;
@@ -42,5 +41,4 @@ header a {
 
 #photoBooth {
 	min-height: 100vh;
-	background-color: palevioletred;
 }
