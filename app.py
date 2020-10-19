@@ -6,8 +6,6 @@ import os
 from pumpkinPi import imgList
 app = Flask(__name__)
 
-print(imgList)
-
 
 @app.route('/')
 def index():
