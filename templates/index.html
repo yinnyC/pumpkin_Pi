@@ -53,9 +53,10 @@
 			email.addEventListener('input', function (e) {
 				let email = e.target.value;
 				console.log(email);
+				let base64Image = getBase64Image();
 				document.querySelector(
 					'.modal a'
-				).href = `mailto:{email}&subject=Picture From PumpkinPi`;
+				).href = `mailto:${email}?subject=PictureFromPumpkinPi&body=${base64Image}`;
 
 				// document.querySelector('.modal img')
 			});
@@ -63,6 +64,34 @@
 			span.onclick = function () {
 				modal.classList.add('hide');
 			};
+			function getBase64Image() {
+				//return LOGO;
+				let dataURL = '';
+				try {
+					let img = document.querySelector('.modal img');
+					// Create an empty canvas element
+					let canvas = document.createElement('canvas');
+					canvas.width = img.width;
+					canvas.height = img.height;
+
+					// Copy the image contents to the canvas
+					let ctx = canvas.getContext('2d');
+					ctx.drawImage(img, 0, 0);
+
+					// Get the data-URL formatted image
+					// Firefox supports PNG and JPEG. You could check img.src to guess the
+					// original format, but be aware the using "image/jpg" will re-encode the image.
+					dataURL = canvas.toDataURL('image/jpeg');
+				} catch (e) {
+					console.log(
+						'Could not retrieve Base64 image with userAgent : ' +
+							navigator.userAgent +
+							' \nException : ' +
+							e
+					);
+				}
+				return dataURL;
+			}
 		</script>
 	</body>
 </html>
