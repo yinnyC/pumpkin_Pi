@@ -6,25 +6,24 @@ from flask import render_template
 import json
 import os
 
-imgList = []
 app = Flask(__name__)
 
 
 def readJson():
     filepath = os.path.dirname(__file__)
     jsonPath = os.path.join(filepath, "ImgData.json")
+    dataList = []
     with open(jsonPath, 'r') as fh:
         readinJson = json.load(fh)
-        imgList = readinJson
-    print(imgList)
+        data = readinJson
+        dataList.extend(data)
+    return dataList
 
 
 @app.route('/')
 def index():
-    readJson()
-    return render_template("index.html", images=imgList)
+    return render_template("index.html", images=readJson())
 
 
 if __name__ == '__main__':
-
     app.run(debug=True)
