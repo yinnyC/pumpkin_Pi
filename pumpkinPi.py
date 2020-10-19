@@ -89,6 +89,7 @@ def readExistingImgPath():
     for (path, dirList, fileList) in os.walk(dir_path):
         for f in fileList:
             dataList.append(os.path.join("/static/target_captured", f))
+    dataList.sort(reverse=True)
     return dataList
 
 
