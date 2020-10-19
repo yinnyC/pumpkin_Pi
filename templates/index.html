@@ -71,9 +71,9 @@
 					let img = document.querySelector('.modal img');
 					// Create an empty canvas element
 					let canvas = document.createElement('canvas');
-					canvas.width = img.width;
-					canvas.height = img.height;
-
+					canvas.width = 1024;
+					canvas.height = 768;
+					console.log(canvas.width, canvas.height);
 					// Copy the image contents to the canvas
 					let ctx = canvas.getContext('2d');
 					ctx.drawImage(img, 0, 0);
