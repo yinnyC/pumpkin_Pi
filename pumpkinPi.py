@@ -14,6 +14,7 @@ import RPi.GPIO as GPIO
 import statistics
 import random
 import picamera
+import json
 
 # --------------------------------
 # Declear Global Variables
@@ -80,13 +81,18 @@ def readExistingImgPath():
             imgList.append(os.path.join("/static/target_captured", f))
 
 
-def captureClip():
+def dumpInData():
+    with open(os.path.join(filepath, 'ImgData.json'), 'w') as fh:
+        json.dump(imgList, fh, indent=3)
+
+
+def captureTarget():
     timestamp = datetime.datetime.now()
-    time_info = f"{timestamp.strftime('%M%d%Y_%H%M%S')}"
-    img_filepath = os.path.join(
-        filepath, f'static/target_captured/{time_info}.jpg')
+    relativePath = f"static/target_captured/{timestamp.strftime('%M%d%Y_%H%M%S')}.jpg"
+    img_filepath = os.path.join(filepath, relativePath)
     camera.capture(img_filepath)
-    imgList.append(img_filepath)
+    imgList.append("/"+relativePath)
+    dumpInData()
 
 
 readExistingImgPath()
@@ -97,9 +103,9 @@ while True:
         print("Distance : %.1f" % distance)
         if(distance == 0 or distance < 100):
             path = random.choice(soundPathList)
-            captureClip()
+            captureTarget()
             os.system(f"mpg321 {path}")
             time.sleep(3)  # time between loop iterations
     except KeyboardInterrupt:
-        print("no")
+        print("KeyboardInterrupt")
         GPIO.cleanup()
