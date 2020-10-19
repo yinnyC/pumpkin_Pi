@@ -4,21 +4,28 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Pumpkin Pi</title>
-		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{{url_for('static',filename='style.css')}}"
+		/>
 	</head>
 	<body>
-		<header>
-			<h4>Pumpkin Pi</h4>
-			<nav>
-				<ul>
-					<li><a href="#photoBooth">Photo Booth</a></li>
-					<li><a href="#">Login</a></li>
-				</ul>
-			</nav>
-		</header>
-		<main id="viewing-window">
-			<center><img src="stream.mjpg" width="640" height="480" /></center>
+		<section id="banner"></section>
+		<main id="photoBooth">
+			<div id="photos">
+				{% for image in images %}
+				<div class="photo">
+					<img src="{{ image }}" />
+					<button class="sendPic">Send Me Dis</button>
+					<!-- <div class="modal">
+						<div class="modal-content">
+							<p>this is the text inside the modal</p>
+						</div>
+					</div> -->
+				</div>
+				{% endfor %}
+			</div>
 		</main>
-		<footer id="photoBooth"></footer>
 	</body>
 </html>

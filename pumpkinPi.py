@@ -32,6 +32,8 @@ time.sleep(0.5)  # Allow module to settle
 speedSound = 34300
 
 filepath = os.path.dirname(__file__)
+dir_path = os.path.join(filepath, "static/target_captured")
+imgList = []
 
 soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat_Scream.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Dark_Laugh.mp3'),
@@ -71,11 +73,23 @@ def get_avgdistance():
         distanceList.append(d)
     return statistics.mean(distanceList)
 
-def captureClip():
-     timestamp = datetime.datetime.now()
-     time_info= f"{timestamp.strftime('%M%d%Y_%H%M%S')}"
-     camera.capture(os.path.join(filepath, f'static/target_captured/{time_info}.jpg'))
 
+def readExistingImgPath():
+    for (path, dirList, fileList) in os.walk(dir_path):
+        for f in fileList:
+            imgList.append(os.path.join("/static/target_captured", f))
+
+
+def captureClip():
+    timestamp = datetime.datetime.now()
+    time_info = f"{timestamp.strftime('%M%d%Y_%H%M%S')}"
+    img_filepath = os.path.join(
+        filepath, f'static/target_captured/{time_info}.jpg')
+    camera.capture(img_filepath)
+    imgList.append(img_filepath)
+
+
+readExistingImgPath()
 
 while True:
     try:
