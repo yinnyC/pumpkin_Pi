@@ -17,46 +17,51 @@
 				{% for image in images %}
 				<div class="photo">
 					<img src="{{ image }}" />
-					<button class="sendPic">Send Me Dis</button>
-					<!-- <div class="modal">
-						<div class="modal-content">
-							<span class="close">&times;</span>
-							<form>
-								<p>Enter Your email to send the Picture</p>
-								<input type="email" />
-								<button>Send</button>
-							</form>
-						</div>
-					</div> -->
+					<button data-url="{{image}}" class="sendPic">Send Me Dis</button>
 				</div>
 				{% endfor %}
 			</div>
 		</main>
+		<div class="modal hide">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<form>
+					<p>Enter Your email to send the Picture</p>
+					<img src="" />
+					<div class="userInput">
+						<input id="userEmail" type="email" />
+						<a href="">Send</a>
+					</div>
+				</form>
+			</div>
+		</div>
 		<script>
+			// Show the modal whenever user click sendpic button
+			document.body.addEventListener('click', function (e) {
+				if (e.target.matches('.sendPic')) {
+					const url = e.target.dataset.url;
+					document.querySelector('.modal img').src = url;
+					document.querySelector('.modal').classList.remove('hide');
+				}
+			});
 			// Get the modal
-			var modal = document.getElementById('myModal');
-
-			// Get the button that opens the modal
-			var btn = document.getElementById('myBtn');
-
+			let modal = document.querySelector('.modal');
 			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName('close')[0];
+			let span = document.getElementsByClassName('close')[0];
+			let email = document.getElementById('userEmail');
 
-			// When the user clicks on the button, open the modal
-			btn.onclick = function () {
-				modal.style.display = 'block';
-			};
+			email.addEventListener('input', function (e) {
+				let email = e.target.value;
+				console.log(email);
+				document.querySelector(
+					'.modal a'
+				).href = `mailto:{email}&subject=Picture From PumpkinPi`;
 
+				// document.querySelector('.modal img')
+			});
 			// When the user clicks on <span> (x), close the modal
 			span.onclick = function () {
-				modal.style.display = 'none';
-			};
-
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function (event) {
-				if (event.target == modal) {
-					modal.style.display = 'none';
-				}
+				modal.classList.add('hide');
 			};
 		</script>
 	</body>
