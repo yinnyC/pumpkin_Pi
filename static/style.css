@@ -46,7 +46,7 @@ body {
 	align-items: center;
 }
 
-.photo button {
+.photo > button {
 	border: none;
 	background-color: #676aec;
 	padding: 1em 1.5em;
@@ -71,9 +71,23 @@ body {
 
 /* Modal Content */
 .modal-content {
-	background-color: #fefefe;
-	margin: auto;
+	background-color: white;
+	margin: 15% auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 80%;
+	width: 40%;
+}
+/* The Close Button */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }

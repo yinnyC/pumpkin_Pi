@@ -1,6 +1,6 @@
 # pumpkinPi.py
-# Measure distance using an ultrasonic module
-# in a loop. Plays Mp3 at certain distance detection
+# Measure distance using an ultrasonic module in a loop.
+# Plays Mp3 and takes picures at certain distance detection
 #
 
 # --------------------------------
@@ -44,8 +44,12 @@ soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat_Scream.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Witches_Laugh.mp3')
                  ]
 
+# Initialize the camera
 camera = picamera.PiCamera()
-print("Ultrasonic Measurement")
+
+# --------------------------------
+# Declear Functions for ultrasonic sensor
+# --------------------------------
 
 
 def get_distance():
@@ -74,8 +78,13 @@ def get_avgdistance():
         distanceList.append(d)
     return statistics.mean(distanceList)
 
+# --------------------------------
+# Declear Functions Handling images
+# --------------------------------
+
 
 def readExistingImgPath():
+    """ This function Reads in all the imgs in the folder """
     dataList = []
     for (path, dirList, fileList) in os.walk(dir_path):
         for f in fileList:
@@ -84,6 +93,7 @@ def readExistingImgPath():
 
 
 def dumpInData(imgList):
+    """ This function accepts data and dumps it into a json file"""
     with open(os.path.join(filepath, 'ImgData.json'), 'w') as fh:
         json.dump(imgList, fh, indent=3)
 
@@ -95,10 +105,16 @@ def captureTarget():
     camera.capture(img_filepath)
     updateFile()
 
+
 def updateFile():
     imgList = readExistingImgPath()
     dumpInData(imgList)
 
+
+# --------------------------------
+# A while loop keeps taking in data and checking if it should react
+# --------------------------------
+print("Ultrasonic Measurement")
 while True:
     try:
         distance = get_avgdistance()
