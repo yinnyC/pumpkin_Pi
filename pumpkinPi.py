@@ -34,7 +34,7 @@ speedSound = 34300
 
 filepath = os.path.dirname(__file__)
 dir_path = os.path.join(filepath, "static/target_captured")
-imgList = []
+
 
 soundPathList = [os.path.join(filepath, 'Resources/sounds/Cat_Scream.mp3'),
                  os.path.join(filepath, 'Resources/sounds/Dark_Laugh.mp3'),
@@ -76,30 +76,33 @@ def get_avgdistance():
 
 
 def readExistingImgPath():
+    dataList = []
     for (path, dirList, fileList) in os.walk(dir_path):
         for f in fileList:
-            imgList.append(os.path.join("/static/target_captured", f))
+            dataList.append(os.path.join("/static/target_captured", f))
+    return dataList
 
 
-def dumpInData():
+def dumpInData(imgList):
     with open(os.path.join(filepath, 'ImgData.json'), 'w') as fh:
         json.dump(imgList, fh, indent=3)
 
 
 def captureTarget():
     timestamp = datetime.datetime.now()
-    relativePath = f"static/target_captured/{timestamp.strftime('%M%d%Y_%H%M%S')}.jpg"
+    relativePath = f"static/target_captured/{timestamp.strftime('%d%b%Y_%H%M%S')}.jpg"
     img_filepath = os.path.join(filepath, relativePath)
     camera.capture(img_filepath)
-    imgList.append("/"+relativePath)
-    dumpInData()
+    updateFile()
 
-
-readExistingImgPath()
+def updateFile():
+    imgList = readExistingImgPath()
+    dumpInData(imgList)
 
 while True:
     try:
         distance = get_avgdistance()
+        updateFile()
         print("Distance : %.1f" % distance)
         if(distance == 0 or distance < 100):
             path = random.choice(soundPathList)
