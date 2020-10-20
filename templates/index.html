@@ -11,9 +11,12 @@
 		/>
 	</head>
 	<body>
+		<!-- Benner section -->
 		<section id="banner"></section>
+		<!-- PhotoBooth section -->
 		<main id="photoBooth">
 			<div id="photos">
+				<!-- Interate thru the images list passed from app.py -->
 				{% for image in images %}
 				<div class="photo">
 					<img src="{{ image }}" />
@@ -22,6 +25,7 @@
 				{% endfor %}
 			</div>
 		</main>
+		<!-- A modal window to send pictures to user -->
 		<div class="modal hide">
 			<div class="modal-content">
 				<span class="close">&times;</span>
@@ -36,7 +40,13 @@
 			</div>
 		</div>
 		<script>
-			// Show the modal whenever user click sendpic button
+			// Get the modal
+			let modal = document.querySelector('.modal');
+			// Get the <span> element that closes the modal
+			let span = document.getElementsByClassName('close')[0];
+			let email = document.getElementById('userEmail');
+
+			// Show the modal whenever user clicks sendpic button
 			document.body.addEventListener('click', function (e) {
 				if (e.target.matches('.sendPic')) {
 					const url = e.target.dataset.url;
@@ -44,12 +54,7 @@
 					document.querySelector('.modal').classList.remove('hide');
 				}
 			});
-			// Get the modal
-			let modal = document.querySelector('.modal');
-			// Get the <span> element that closes the modal
-			let span = document.getElementsByClassName('close')[0];
-			let email = document.getElementById('userEmail');
-
+			// Whenever user types in email, update the href of the send button
 			email.addEventListener('input', function (e) {
 				let email = e.target.value;
 				console.log(email);
@@ -64,7 +69,6 @@
 				modal.classList.add('hide');
 			};
 			function getBase64Image() {
-				//return LOGO;
 				let dataURL = '';
 				try {
 					let img = document.querySelector('.modal img');
@@ -72,14 +76,9 @@
 					let canvas = document.createElement('canvas');
 					canvas.width = 1024;
 					canvas.height = 768;
-					
 					// Copy the image contents to the canvas
 					let ctx = canvas.getContext('2d');
 					ctx.drawImage(img, 0, 0);
-
-					// Get the data-URL formatted image
-					// Firefox supports PNG and JPEG. You could check img.src to guess the
-					// original format, but be aware the using "image/jpg" will re-encode the image.
 					dataURL = canvas.toDataURL('image/jpeg');
 				} catch (e) {
 					console.log(

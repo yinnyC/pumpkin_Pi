@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 
 def readJson():
+    """ This funcction reads in Image Paths in the Json file """
     filepath = os.path.dirname(__file__)
     jsonPath = os.path.join(filepath, "ImgData.json")
     dataList = []
