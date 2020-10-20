@@ -57,8 +57,7 @@
 				document.querySelector(
 					'.modal a'
 				).href = `mailto:${email}?subject=PictureFromPumpkinPi&body=${base64Image}`;
-
-				// document.querySelector('.modal img')
+				console.log(base64Image);
 			});
 			// When the user clicks on <span> (x), close the modal
 			span.onclick = function () {
@@ -73,7 +72,7 @@
 					let canvas = document.createElement('canvas');
 					canvas.width = 1024;
 					canvas.height = 768;
-					console.log(canvas.width, canvas.height);
+					
 					// Copy the image contents to the canvas
 					let ctx = canvas.getContext('2d');
 					ctx.drawImage(img, 0, 0);
