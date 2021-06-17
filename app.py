@@ -1,8 +1,5 @@
 # app.py
-from multiprocessing import Process
-from flask import Response
-from flask import Flask
-from flask import render_template
+from flask import Response, Flask, render_template
 import json
 import os
 
