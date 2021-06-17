@@ -7,10 +7,21 @@ Later on, the picture will be uploaded onto a website, like a photo booth of the
 
 ## Instruction
 
-1. Open two terminals and cd to the where the project file is
-2. In one terminal, type in: \$python pumpkinPi.py
-3. Then type : \$python app.py in another terminal
-4. Enjoy the PumpkinPi and check your photo here: http://127.0.0.1:5000/
+- Open two terminals and cd to the where the project file is
+- Run the command below in one terminal to fire up the pumpkin pi device.  
+
+  ``` terminal command
+  python pumpkinPi.py
+  ```
+
+- In another terminal, run the command below to set up the photobooth
+
+  ``` terminal command
+  docker build -t pumpkinpi .
+  docker run -p 5000:5000 --rm --name flask-container pumpkinpi
+  ```
+
+- Enjoy the PumpkinPi and check your photo here: [http://localhost:5000/](http://localhost:5000/)
 
 ### Pumpkin Pi Photo Booth
 
@@ -43,16 +54,6 @@ _There You Have It!_
 
 I followed the tutorial form [here](https://pimylifeup.com/raspberry-pi-distance-sensor/),to wire the sensor up with the raspberry Pi
 ![Wiring](https://pi.lbbcdn.com/wp-content/uploads/2018/03/Distance-Sensor-Fritz-768x599.png)
-
-## Product Features
-
-- [x] Skateboard: Install the sensor(HC-SR04 Ultrasonic Sensor) and detect if someone walks by, then take a picture with the pi camera
-- [x] Bike: Upload pictures and display them on a website
-- [x] add feature: Allow user to send pictures to their email
-
-<!-- ## Wire Frames
-
-![Wireframe](./Resources/readme_imgs/Wireframe.jpg) -->
 
 ## Copyright
 
